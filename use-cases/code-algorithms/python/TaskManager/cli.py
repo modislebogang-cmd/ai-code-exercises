@@ -43,16 +43,18 @@ def main():
     create_parser.add_argument("-u", "--due", help="Due date (YYYY-MM-DD)", default=None)
     create_parser.add_argument("-t", "--tags", help="Comma-separated tags", default="")
 
+    status_choices = ["todo", "in_progress", "review", "done", "abandoned"]
+
     # List tasks command
     list_parser = subparsers.add_parser("list", help="List all tasks")
-    list_parser.add_argument("-s", "--status", help="Filter by status", choices=["todo", "in_progress", "review", "done"])
+    list_parser.add_argument("-s", "--status", help="Filter by status", choices=status_choices)
     list_parser.add_argument("-p", "--priority", help="Filter by priority", type=int, choices=[1, 2, 3, 4])
     list_parser.add_argument("-o", "--overdue", help="Show only overdue tasks", action="store_true")
 
     # Update task commands
     update_status_parser = subparsers.add_parser("status", help="Update task status")
     update_status_parser.add_argument("task_id", help="Task ID")
-    update_status_parser.add_argument("status", help="New status", choices=["todo", "in_progress", "review", "done"])
+    update_status_parser.add_argument("status", help="New status", choices=status_choices)
 
     update_priority_parser = subparsers.add_parser("priority", help="Update task priority")
     update_priority_parser.add_argument("task_id", help="Task ID")

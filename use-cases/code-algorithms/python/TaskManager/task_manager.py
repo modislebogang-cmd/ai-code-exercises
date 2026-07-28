@@ -6,8 +6,34 @@ from storage import TaskStorage
 
 
 class TaskManager:
+    ABANDONMENT_THRESHOLD_DAYS = 7
+
     def __init__(self, storage_path="tasks.json"):
         self.storage = TaskStorage(storage_path)
+
+    def _should_mark_abandoned(self, task):
+        if not isinstance(task, Task):
+            return False
+
+        if task.status in {TaskStatus.DONE, TaskStatus.ABANDONED}:
+            return False
+
+        if not task.due_date:
+            return False
+
+        days_overdue = (datetime.now().date() - task.due_date.date()).days
+        if days_overdue <= self.ABANDONMENT_THRESHOLD_DAYS:
+            return False
+
+        return task.priority not in {TaskPriority.HIGH, TaskPriority.URGENT}
+
+    def _apply_abandonment_rule(self, task):
+        if self._should_mark_abandoned(task):
+            task.status = TaskStatus.ABANDONED
+            task.updated_at = datetime.now()
+            self.storage.save()
+            return True
+        return False
 
     def create_task(self, title, description="", priority_value=2,
                    due_date_str=None, tags=None):
@@ -26,17 +52,33 @@ class TaskManager:
 
     def list_tasks(self, status_filter=None, priority_filter=None, show_overdue=False):
         if show_overdue:
-            return self.storage.get_overdue_tasks()
+            overdue_tasks = self.storage.get_overdue_tasks()
+            if isinstance(overdue_tasks, (list, tuple)):
+                for task in overdue_tasks:
+                    self._apply_abandonment_rule(task)
+            return overdue_tasks
 
         if status_filter:
             status = TaskStatus(status_filter)
-            return self.storage.get_tasks_by_status(status)
+            tasks = self.storage.get_tasks_by_status(status)
+            if isinstance(tasks, (list, tuple)):
+                for task in tasks:
+                    self._apply_abandonment_rule(task)
+            return tasks
 
         if priority_filter:
             priority = TaskPriority(priority_filter)
-            return self.storage.get_tasks_by_priority(priority)
+            tasks = self.storage.get_tasks_by_priority(priority)
+            if isinstance(tasks, (list, tuple)):
+                for task in tasks:
+                    self._apply_abandonment_rule(task)
+            return tasks
 
-        return self.storage.get_all_tasks()
+        tasks = self.storage.get_all_tasks()
+        if isinstance(tasks, (list, tuple)):
+            for task in tasks:
+                self._apply_abandonment_rule(task)
+        return tasks
 
     def update_task_status(self, task_id, new_status_value):
         new_status = TaskStatus(new_status_value)
@@ -51,12 +93,22 @@ class TaskManager:
 
     def update_task_priority(self, task_id, new_priority_value):
         new_priority = TaskPriority(new_priority_value)
-        return self.storage.update_task(task_id, priority=new_priority)
+        result = self.storage.update_task(task_id, priority=new_priority)
+        if result:
+            task = self.storage.get_task(task_id)
+            if task:
+                self._apply_abandonment_rule(task)
+        return result
 
     def update_task_due_date(self, task_id, due_date_str):
         try:
             due_date = datetime.strptime(due_date_str, "%Y-%m-%d")
-            return self.storage.update_task(task_id, due_date=due_date)
+            result = self.storage.update_task(task_id, due_date=due_date)
+            if result:
+                task = self.storage.get_task(task_id)
+                if task:
+                    self._apply_abandonment_rule(task)
+            return result
         except ValueError:
             print("Invalid date format. Use YYYY-MM-DD")
             return False
@@ -65,7 +117,10 @@ class TaskManager:
         return self.storage.delete_task(task_id)
 
     def get_task_details(self, task_id):
-        return self.storage.get_task(task_id)
+        task = self.storage.get_task(task_id)
+        if task:
+            self._apply_abandonment_rule(task)
+        return task
 
     def add_tag_to_task(self, task_id, tag):
         task = self.storage.get_task(task_id)
@@ -86,6 +141,9 @@ class TaskManager:
 
     def get_statistics(self):
         tasks = self.storage.get_all_tasks()
+        for task in tasks:
+            self._apply_abandonment_rule(task)
+
         total = len(tasks)
 
         # Count by status

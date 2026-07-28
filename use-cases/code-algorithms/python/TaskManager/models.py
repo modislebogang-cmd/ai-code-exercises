@@ -14,6 +14,7 @@ class TaskStatus(Enum):
     IN_PROGRESS = "in_progress"
     REVIEW = "review"
     DONE = "done"
+    ABANDONED = "abandoned"
 
 class Task:
     def __init__(self, title, description="", priority=TaskPriority.MEDIUM,
@@ -43,4 +44,4 @@ class Task:
     def is_overdue(self):
         if not self.due_date:
             return False
-        return self.due_date < datetime.now() and self.status != TaskStatus.DONE
+        return self.due_date < datetime.now() and self.status not in {TaskStatus.DONE, TaskStatus.ABANDONED}

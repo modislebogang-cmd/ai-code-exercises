@@ -1,0 +1,31 @@
+as junior developer i was taked with the needs to implement a new business rule: "Tasks that are overdue for more than 7 days should be automatically marked as abandoned unless they are marked as high priority."
+
+project structure is as follows:
+[
+d-----        7/29/2026  12:55 AM                tests                                                             
+-a----        7/29/2026  12:55 AM             10 .gitignore                                                        
+-a----        7/29/2026  12:55 AM           6817 cli.py                                                            
+-a----        7/28/2026  10:12 PM              0 exercise 4 Practical Application.txt                              
+-a----        7/28/2026  11:27 PM           3582 findings.md                                                       
+-a----        7/28/2026   8:19 PM           2655 findings2.md                                                      
+-a----        7/28/2026   9:54 PM           2270 findings3.md                                                      
+-a----        7/29/2026  12:55 AM           1304 models.py                                                         
+-a----        7/29/2026  12:55 AM           1682 README.md                                                         
+-a----        7/29/2026  12:55 AM           3530 storage.py                                                        
+-a----        7/29/2026  12:55 AM           4512 task_list_merge.py                                                
+-a----        7/29/2026  12:55 AM           4086 task_manager.py                                                   
+-a----        7/29/2026  12:55 AM           4013 task_parser.py                                                    
+-a----        7/29/2026  12:55 AM           2033 task_priority.py                                                  
+-a----        7/28/2026   4:16 PM           3282 wethinkcode promt 1.txt                                           
+-a----        7/28/2026   7:15 PM           2221 wethinkcode promt 2.txt                                           
+-a----        7/28/2026  10:11 PM           3689 wethinkcode promt 3.txt 
+]
+
+1. which files will i need to modify and why 
+2. Outline the changes you would make to implement this rule
+3. show me step by step to implement the new rule and the exact file to make changes
+4. show me where i can improve my code 
+5. make a short summary to explain to someone what i added and why and what difference does make to the business
+
+
+lastly please  note questions i would ask my team before implementing 

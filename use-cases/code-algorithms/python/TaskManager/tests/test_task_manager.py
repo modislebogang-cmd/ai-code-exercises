@@ -1,3 +1,5 @@
+import os
+import tempfile
 from datetime import datetime, timedelta
 from unittest.mock import MagicMock
 from unittest.mock import Mock
@@ -192,8 +194,9 @@ class TaskManagerTest(unittest.TestCase):
         self.assertEqual(result["by_status"], {
             "todo": 1,
             "in_progress": 1,
+            "review": 0,
             "done": 1,
-            "review": 0
+            "abandoned": 0
         })
         self.assertEqual(result["by_priority"], {
             "LOW": 1,
@@ -590,3 +593,60 @@ class TaskManagerTest(unittest.TestCase):
         self.assertFalse(result)
         task_manager.storage.get_task.assert_called_once_with("non_existent_task_id")
         task_manager.storage.save.assert_not_called()
+
+    def test_old_overdue_tasks_are_abandoned_unless_high_priority(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            storage_path = os.path.join(temp_dir, "tasks.json")
+            task_manager = TaskManager(storage_path=storage_path)
+
+            cases = [
+                ("medium priority overdue", TaskPriority.MEDIUM, datetime.now() - timedelta(days=8), TaskStatus.ABANDONED),
+                ("high priority overdue", TaskPriority.HIGH, datetime.now() - timedelta(days=8), TaskStatus.TODO),
+                ("medium priority recent", TaskPriority.MEDIUM, datetime.now() - timedelta(days=3), TaskStatus.TODO),
+            ]
+
+            for title, priority, due_date, expected_status in cases:
+                with self.subTest(title=title):
+                    task_id = task_manager.create_task(
+                        title,
+                        "Description",
+                        priority.value,
+                        due_date.strftime("%Y-%m-%d"),
+                    )
+                    task = task_manager.get_task_details(task_id)
+                    self.assertEqual(task.status, expected_status)
+
+    def test_get_task_details_marks_old_overdue_task_as_abandoned(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            storage_path = os.path.join(temp_dir, "tasks.json")
+            task_manager = TaskManager(storage_path=storage_path)
+
+            old_due_date = (datetime.now() - timedelta(days=8)).strftime("%Y-%m-%d")
+            task_id = task_manager.create_task(
+                "Old Task",
+                "Description",
+                TaskPriority.MEDIUM.value,
+                old_due_date,
+            )
+
+            updated_task = task_manager.get_task_details(task_id)
+
+            self.assertEqual(updated_task.status, TaskStatus.ABANDONED)
+
+    def test_get_task_details_keeps_high_priority_task_active(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            storage_path = os.path.join(temp_dir, "tasks.json")
+            task_manager = TaskManager(storage_path=storage_path)
+
+            old_due_date = (datetime.now() - timedelta(days=8)).strftime("%Y-%m-%d")
+            task_id = task_manager.create_task(
+                "High Priority Task",
+                "Description",
+                TaskPriority.HIGH.value,
+                old_due_date,
+            )
+
+            updated_task = task_manager.get_task_details(task_id)
+
+            self.assertEqual(updated_task.status, TaskStatus.TODO)
+            self.assertNotEqual(updated_task.status, TaskStatus.ABANDONED)
