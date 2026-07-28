@@ -1,0 +1,53 @@
+I'm a junior developer who just joined this project. I've read the README but still need help understanding the project structure and technology stack.
+
+Here's my current understanding of the project:
+- It seems to be a [a app that list all my tasks by status(todo, in progress, review, done) ]
+- It appears to use [pyhton3]
+- The folder structure seems to follow [code-algorithms\python\TaskManager]
+
+Project structure:
+[
+Mode                LastWriteTime         Length Name                                                                                
+----                -------------         ------ ----                                                                                
+d-----        7/28/2026   9:03 PM                tests                                                                               
+d-----        7/28/2026   9:03 PM                __pycache__                                                                         
+-a----        7/28/2026   8:36 PM             10 .gitignore                                                                          
+-a----        7/28/2026   8:36 PM           6817 cli.py                                                                              
+-a----        7/28/2026   8:36 PM           1304 models.py                                                                           
+-a----        7/28/2026   8:36 PM           1682 README.md                                                                           
+-a----        7/28/2026   8:36 PM           3530 storage.py                                                                          
+-a----        7/28/2026   9:03 PM           1123 tasks.json                                                                          
+-a----        7/28/2026   8:36 PM           4512 task_list_merge.py                                                                  
+-a----        7/28/2026   8:36 PM           4086 task_manager.py                                                                     
+-a----        7/28/2026   8:36 PM           4013 task_parser.py                                                                      
+-a----        7/28/2026   8:36 PM           2033 task_priority.py
+
+]
+
+Key configuration files:
+[[
+  {
+    "id": "dd19dad5-6b9c-4a2c-94d5-c1608601749a",
+    "title": "Task Title",
+    "description": "Task description",
+    "priority": 2,
+    "status": "todo",
+    "created_at": "2026-07-28T20:56:14.317937",
+    "updated_at": "2026-07-28T20:56:14.317937",
+    "due_date": "2024-01-31T00:00:00",
+    "completed_at": null,
+    "tags": [
+      "tag1",
+      "tag2"
+    ]]
+
+Could you:
+1. Validate my understanding and correct any misconceptions
+2. Identify additional key technologies, frameworks, and libraries used
+3. Explain what each main folder likely contains and its purpose
+4. Point out where the application entry points are located
+5. Suggest 3-5 specific questions I should ask my team to deepen my understanding
+
+I'm particularly confused about [what are the product structures and which ones are key configuration files].
+
+After your explanation, could you suggest a small exploration exercise I could do to verify my understanding of the project structure?

@@ -1,0 +1,35 @@
+I need to work on the [Task Export to CSV] in this codebase, but I'm not sure where the code for this feature lives.
+
+My approach so far:
+- I've searched for keywords like [import csv, open with, to csv, download]
+- I looked in [storage.py, task_manager.py, task_parser.py] which seemed relevant
+- I think the feature might relate to [def __init__.py]
+
+Project structure:
+[
+d-----        7/29/2026  12:55 AM                tests
+-a----        7/29/2026  12:55 AM             10 .gitignore                                     
+-a----        7/29/2026  12:55 AM           6817 cli.py                                         
+-a----        7/28/2026  11:27 PM           3582 findings.md                                    
+-a----        7/29/2026  12:55 AM           1304 models.py                                      
+-a----        7/29/2026  12:55 AM           1682 README.md                                      
+-a----        7/29/2026  12:55 AM           3530 storage.py                                     
+-a----        7/29/2026  12:55 AM           4512 task_list_merge.py                             
+-a----        7/29/2026  12:55 AM           4086 task_manager.py                                
+-a----        7/29/2026  12:55 AM           4013 task_parser.py                                 
+-a----        7/29/2026  12:55 AM           2033 task_priority.py 
+]
+
+Based on my search, these files might be relevant, but I'm not sure:
+[storage.py]
+
+Can you help me:
+1. Evaluate my search approach and suggest improvements
+2. Identify which files and directories most likely contain the implementation for this feature
+3. Suggest specific search terms or patterns that would be more effective
+4. Explain what parts of the feature might be located in different areas of the codebase
+5. Recommend a step-by-step investigation process to understand the complete feature flow
+
+Also, what questions could I ask myself as I'm exploring the code to ensure I'm on the right track? What specific patterns should I look for to confirm I've found all the relevant parts?
+
+After your guidance, could you give me a small challenge to test my understanding of how to navigate this feature's code?
