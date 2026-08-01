@@ -1,68 +1,3 @@
-# Code Understanding Journal
-
-## Quick Markdown Cheat Sheet
-
-### Headings
-
-```md
-# Heading 1
-## Heading 2
-### Heading 3
-```
-
-### Bold and Italic
-
-```md
-**bold**
-*italic*
-***bold italic***
-```
-
-### Lists
-
-```md
-- Bullet item
-- Another bullet item
-
-1. Numbered item
-2. Another numbered item
-```
-
-### Links and Images
-
-```md
-[Link text](https://example.com)
-![Alt text](image.png)
-```
-
-### Code Blocks
-
-```md
-```python
-print("Hello, world!")
-```
-```
-
-### Blockquotes
-
-```md
-> This is a quote.
-```
-
-### Horizontal Rule
-
-```md
----
-```
-
-### Tables
-
-```md
-| Column 1 | Column 2 |
-|----------|----------|
-| Value 1  | Value 2  |
-```
-
 ## Main Components Involved in Task Creation and Updates
 
 ### Findings note
@@ -115,3 +50,10 @@ def update_task_status(self, task_id, new_status_value):
 - Encapsulation: TaskManager and TaskStorage hide the details of how updates and persistence work.
 - Simple repository-like pattern: TaskStorage acts like a small repository for reading and writing tasks.
 - Enum-based modeling: TaskStatus and TaskPriority use enums to make valid states explicit.
+
+### Initial understanding vs. AI findings
+- Initial understanding correctly identified `task_priority.py`, `task_manager.py`, and `cli.py` as key files.
+- The AI findings confirmed score calculation and sorting happen in `task_priority.py`, and that task creation persists through JSON storage.
+- The initial belief in a `task_parser.py` validation step was not supported by this version of the codebase.
+- The prompt's mention of "boost your score" is clarified as tag-based boosts and recent-update boosts inside `calculate_task_score()`.
+- The AI findings also highlighted the precise flow for invalid due dates and the fact that `TaskManager.create_task()` handles date parsing and task creation directly.
