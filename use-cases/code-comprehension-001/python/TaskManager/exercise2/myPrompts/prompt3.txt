@@ -1,0 +1,30 @@
+I need help understanding how data flows through our [python] application, specifically for the [how task completion functionality works] functionality.
+
+Here's what I know so far:
+- The feature starts at [storage.py by first recalling stored values]
+- It seems to involve these components/files:
+  1. [storage.py]
+  2. [task_parser.py]
+  3. [task_manager.py]
+
+Here are key functions from [C:\Users\LebZana\Desktop\ai-code-exercises\use-cases\code-comprehension-001\python\TaskManager\task_parser.py] that show data handling:
+
+[def parse_task_from_text(text)] checks if user provided required data before storing
+
+
+What I'm trying to understand:
+1. What is the complete path data takes from input to output?
+2. How and where is state managed throughout this process?
+3. What transformations happen to the data at each step?
+4. Where are potential points of failure in this data flow?
+5. How does the application handle edge cases or errors?
+
+I've noticed [specific data structure or state management approach] being used but I'm not sure why this approach was chosen over alternatives.
+
+Could you help me create a clear mental model of:
+1. The complete data flow diagram
+2. Where and how state changes occur
+3. How I might debug issues in this flow
+4. What I should consider if I need to modify this data flow in the future
+
+Please include any relevant descriptions, design patterns or principles that would help me understand the existing code decisions.
