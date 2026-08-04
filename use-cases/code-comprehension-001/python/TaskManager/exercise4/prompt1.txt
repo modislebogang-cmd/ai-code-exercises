@@ -1,0 +1,21 @@
+Please create comprehensive documentation for this function following [C:\Users\LebZana\Desktop\ai-code-exercises\use-cases\code-comprehension-001\python\TaskManager\task_parser.py] conventions:
+
+```[language]
+[
+def get_next_weekday(current_date, weekday):
+    """Get the next occurrence of a specific weekday."""
+    days_ahead = weekday - current_date.weekday()
+    if days_ahead <= 0:  # Target day already happened this week
+        days_ahead += 7
+    return current_date + timedelta(days=days_ahead)
+
+]
+```
+
+The documentation should include:
+1. A clear description of what the function does
+2. All parameters with types and descriptions
+3. Return value with type and description
+4. Any exceptions or errors that might be thrown
+5. Example usage
+6. Any important notes or edge cases developers should be aware of
