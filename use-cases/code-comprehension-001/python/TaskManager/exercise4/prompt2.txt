@@ -1,0 +1,19 @@
+I need help documenting the intent and logic behind this code. Please:
+
+```[python]
+[
+def get_next_weekday(current_date, weekday):
+    """Get the next occurrence of a specific weekday."""
+    days_ahead = weekday - current_date.weekday()
+    if days_ahead <= 0:  # Target day already happened this week
+        days_ahead += 7
+    return current_date + timedelta(days=days_ahead)
+
+]
+```
+
+1. Explain what this code is trying to accomplish at a high level
+2. Break down the logic step-by-step
+3. Identify any assumptions or edge cases in the implementation
+4. Suggest inline comments for complex parts
+5. Note any potential improvements while maintaining the original functionality
