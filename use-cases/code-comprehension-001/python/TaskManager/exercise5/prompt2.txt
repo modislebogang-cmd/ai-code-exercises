@@ -1,0 +1,182 @@
+Please convert this API information into a structured [OpenAPI] document:
+
+API details:
+[
+# List Products API
+
+Get a list of products with flexible filtering, sorting, and pagination.
+
+## Endpoint
+
+`GET /api/products`
+
+## Authentication
+
+No authentication required for this endpoint.
+
+## Query Parameters
+
+| Parameter | Type   | Required | Description                                           |
+|-----------|--------|----------|-------------------------------------------------------|
+| category  | String | No       | Filter products by category                           |
+| minPrice  | Number | No       | Filter products with price greater than or equal to this value |
+| maxPrice  | Number | No       | Filter products with price less than or equal to this value |
+| sort      | String | No       | Field to sort by (default: 'createdAt')              |
+| order     | String | No       | Sort order: 'asc' or 'desc' (default: 'desc')        |
+| page      | Number | No       | Page number for pagination (default: 1)              |
+| limit     | Number | No       | Number of items per page (default: 20)               |
+| inStock   | Boolean| No       | When 'true', only show products with stock > 0       |
+
+## Response
+
+### Success Response
+
+**Code**: 200 OK
+
+**Content Example**:
+
+```json
+{
+"products": [
+{
+"_id": "61fa9bcf5c130b2e6d675432",
+"name": "Wireless Headphones",
+"description": "High-quality wireless headphones with noise cancellation",
+"price": 89.99,
+"category": "electronics",
+"stockQuantity": 45,
+"createdAt": "2023-02-01T15:32:47Z",
+"updatedAt": "2023-03-15T09:21:08Z"
+},
+{
+"_id": "61fa9bcf5c130b2e6d675433",
+"name": "Smartphone Case",
+"description": "Protective case for smartphones",
+"price": 19.99,
+"category": "accessories",
+"stockQuantity": 200,
+"createdAt": "2023-02-02T10:11:33Z",
+"updatedAt": "2023-02-02T10:11:33Z"
+}
+],
+"pagination": {
+"total": 42,
+"page": 1,
+"limit": 20,
+"pages": 3
+}
+}
+```
+
+### Error Response
+
+**Code**: 500 Internal Server Error
+
+**Content Example**:
+```json
+{
+"error": "Server error",
+"message": "Failed to fetch products"
+}
+```
+
+## Examples
+
+### Request: Get all products in the "electronics" category
+
+```
+GET /api/products?category=electronics
+```
+
+### Response
+
+```json
+{
+"products": [
+{
+"_id": "61fa9bcf5c130b2e6d675432",
+"name": "Wireless Headphones",
+"description": "High-quality wireless headphones with noise cancellation",
+"price": 89.99,
+"category": "electronics",
+"stockQuantity": 45,
+"createdAt": "2023-02-01T15:32:47Z",
+"updatedAt": "2023-03-15T09:21:08Z"
+},
+{
+"_id": "61fa9bcf5c130b2e6d675435",
+"name": "Bluetooth Speaker",
+"description": "Portable bluetooth speaker with 20 hour battery life",
+"price": 49.99,
+"category": "electronics",
+"stockQuantity": 32,
+"createdAt": "2023-01-25T14:22:19Z",
+"updatedAt": "2023-03-10T11:05:24Z"
+}
+],
+"pagination": {
+"total": 12,
+"page": 1,
+"limit": 20,
+"pages": 1
+}
+}
+```
+
+### Request: Get products with price between $20 and $100, sorted by price
+
+```
+GET /api/products?minPrice=20&maxPrice=100&sort=price&order=asc&page=1&limit=10
+```
+
+### Response
+
+```json
+{
+"products": [
+{
+"_id": "61fa9bcf5c130b2e6d675439",
+"name": "T-Shirt",
+"description": "Cotton t-shirt with logo",
+"price": 24.99,
+"category": "clothing",
+"stockQuantity": 150,
+"createdAt": "2023-01-15T08:27:13Z",
+"updatedAt": "2023-01-15T08:27:13Z"
+},
+{
+"_id": "61fa9bcf5c130b2e6d675435",
+"name": "Bluetooth Speaker",
+"description": "Portable bluetooth speaker with 20 hour battery life",
+"price": 49.99,
+"category": "electronics",
+"stockQuantity": 32,
+"createdAt": "2023-01-25T14:22:19Z",
+"updatedAt": "2023-03-10T11:05:24Z"
+}
+],
+"pagination": {
+"total": 18,
+"page": 1,
+"limit": 10,
+"pages": 2
+}
+}
+```
+
+## Notes
+
+- The API uses MongoDB for data storage
+- All timestamps are in ISO 8601 format (UTC)
+- Product IDs are MongoDB ObjectId strings
+- The maximum allowed limit per page is 100 items
+]
+
+I need the documentation to include:
+1. Endpoint definitions with paths and methods
+2. Request parameters and body schemas
+3. Response schemas with status codes
+4. Example requests and responses
+5. Error handling information
+
+Format the output as a complete, valid [OpenAPI] document.
