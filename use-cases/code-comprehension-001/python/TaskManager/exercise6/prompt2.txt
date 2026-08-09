@@ -1,0 +1,21 @@
+Please create a step-by-step guide for how to [create A data analysis and visualization framework for scientific data] in our application.
+
+The guide should:
+1. Start with any prerequisites or required access
+2. Break down the process into clear, numbered steps
+3. Include screenshots or code blocks where indicated [Placeholder]
+4. Highlight potential issues or common mistakes
+5. End with a troubleshooting section for common problems
+
+Process overview:
+[
+Key features:
+- Data import from various sources (CSV, Excel, SQL, APIs)
+- Data cleaning and transformation tools
+- Statistical analysis functions
+- Interactive visualizations
+- Report generation
+- Export capabilities
+]
+
+User experience level: [Intermediate]

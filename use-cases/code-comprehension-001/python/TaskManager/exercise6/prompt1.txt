@@ -1,0 +1,38 @@
+Please create a comprehensive README.md file for my project based on the following information:
+
+Project name: DataInsight
+Description: A data analysis and visualization framework for scientific data
+
+Key features:
+- Data import from various sources (CSV, Excel, SQL, APIs)
+- Data cleaning and transformation tools
+- Statistical analysis functions
+- Interactive visualizations
+- Report generation
+- Export capabilities
+
+Technologies used: Python, Pandas, NumPy, Matplotlib, Plotly, Jupyter
+Installation requirements: Python 3.8+, pip
+
+Project structure:
+/datainsight - Main package
+/datainsight/io - Data import/export modules
+/datainsight/transform - Data transformation tools
+/datainsight/analysis - Analysis algorithms
+/datainsight/viz - Visualization tools
+/datainsight/report - Report generation
+/examples - Example notebooks
+/tests - Unit tests
+
+The README should include:
+1. Clear project title and description
+2. Installation instructions
+3. Basic usage examples
+4. Features overview
+5. Configuration options
+6. Troubleshooting section
+7. Contributing guidelines
+8. License information
+
+Code structure overview:
+[Briefly describe main directories/files or paste project structure]
